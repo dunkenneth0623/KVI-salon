@@ -1,5 +1,74 @@
 import { useEffect, useMemo, useState } from 'react'
-import { Activity, Droplets, FileText, Flame, HandHeart, HeartPulse, Leaf, Plus, Save, Sparkles, Tags, Trash2 } from 'lucide-react'
+import {
+  Activity,
+  Archive,
+  Award,
+  BadgeInfo,
+  Banknote,
+  Bell,
+  BookMarked,
+  BookOpen,
+  BriefcaseBusiness,
+  Building2,
+  CalendarDays,
+  Camera,
+  CarFront,
+  Check,
+  Bike,
+  Bird,
+  Cake,
+  ClipboardCheck,
+  ClipboardList,
+  Cloud,
+  Dumbbell,
+  Droplets,
+  FileText,
+  Flame,
+  Gift,
+  Globe,
+  GraduationCap,
+  HandHeart,
+  HeartHandshake,
+  HeartPulse,
+  Hammer,
+  Home,
+  Leaf,
+  Landmark,
+  Lamp,
+  MapPin,
+  Mic,
+  Megaphone,
+  MessageSquare,
+  ChevronDown,
+  Paintbrush,
+  Package,
+  PawPrint,
+  Plane,
+  Plus,
+  Save,
+  Radio,
+  Rocket,
+  Search,
+  ShoppingBag,
+  ShieldCheck,
+  Sparkles,
+  Star,
+  Telescope,
+  Ticket,
+  Tags,
+  Trash2,
+  TrainFront,
+  TreePine,
+  Truck,
+  Tv,
+  UtensilsCrossed,
+  Video,
+  Wifi,
+  Wind,
+  Zap,
+  Users,
+  Wrench,
+} from 'lucide-react'
 import { useAuth } from '../context/AuthContext'
 import { useI18n } from '../i18n/useI18n'
 import { supabase } from '../lib/supabaseClient'
@@ -150,11 +219,11 @@ const buildCategoryColorMap = (keys = []) => {
 }
 
 const FIELD_TYPES = [
-  { value: 'text', label: 'Text' },
   { value: 'number', label: 'Number' },
 ]
 
 const LEGACY_FIELD_TYPES = [
+  { value: 'text', label: 'Text (Legacy)' },
   { value: 'date', label: 'Date (Legacy)' },
   { value: 'boolean', label: 'Boolean (Legacy)' },
 ]
@@ -170,6 +239,60 @@ const ICON_OPTIONS = [
   { key: 'tags', label: 'Tags', Icon: Tags },
   { key: 'sparkles', label: 'Sparkles', Icon: Sparkles },
   { key: 'activity', label: 'Activity', Icon: Activity },
+  { key: 'archive', label: 'Archive', Icon: Archive },
+  { key: 'award', label: 'Award', Icon: Award },
+  { key: 'badge_info', label: 'Badge Info', Icon: BadgeInfo },
+  { key: 'banknote', label: 'Banknote', Icon: Banknote },
+  { key: 'bell', label: 'Bell', Icon: Bell },
+  { key: 'book_open', label: 'Book Open', Icon: BookOpen },
+  { key: 'bike', label: 'Bike', Icon: Bike },
+  { key: 'bird', label: 'Bird', Icon: Bird },
+  { key: 'cake', label: 'Cake', Icon: Cake },
+  { key: 'cloud', label: 'Cloud', Icon: Cloud },
+  { key: 'dumbbell', label: 'Dumbbell', Icon: Dumbbell },
+  { key: 'gift', label: 'Gift', Icon: Gift },
+  { key: 'graduation_cap', label: 'Graduation Cap', Icon: GraduationCap },
+  { key: 'hammer', label: 'Hammer', Icon: Hammer },
+  { key: 'lamp', label: 'Lamp', Icon: Lamp },
+  { key: 'mic', label: 'Mic', Icon: Mic },
+  { key: 'paintbrush', label: 'Paintbrush', Icon: Paintbrush },
+  { key: 'plane', label: 'Plane', Icon: Plane },
+  { key: 'radio', label: 'Radio', Icon: Radio },
+  { key: 'rocket', label: 'Rocket', Icon: Rocket },
+  { key: 'search', label: 'Search', Icon: Search },
+  { key: 'shopping_bag', label: 'Shopping Bag', Icon: ShoppingBag },
+  { key: 'telescope', label: 'Telescope', Icon: Telescope },
+  { key: 'ticket', label: 'Ticket', Icon: Ticket },
+  { key: 'train_front', label: 'Train', Icon: TrainFront },
+  { key: 'tree_pine', label: 'Tree', Icon: TreePine },
+  { key: 'truck', label: 'Truck', Icon: Truck },
+  { key: 'tv', label: 'TV', Icon: Tv },
+  { key: 'utensils_crossed', label: 'Utensils', Icon: UtensilsCrossed },
+  { key: 'video', label: 'Video', Icon: Video },
+  { key: 'wifi', label: 'Wifi', Icon: Wifi },
+  { key: 'wind', label: 'Wind', Icon: Wind },
+  { key: 'zap', label: 'Zap', Icon: Zap },
+  { key: 'users', label: 'Users', Icon: Users },
+  { key: 'shield_check', label: 'Shield', Icon: ShieldCheck },
+  { key: 'building_2', label: 'Building', Icon: Building2 },
+  { key: 'landmark', label: 'Landmark', Icon: Landmark },
+  { key: 'megaphone', label: 'Megaphone', Icon: Megaphone },
+  { key: 'briefcase_business', label: 'Briefcase', Icon: BriefcaseBusiness },
+  { key: 'clipboard_list', label: 'Clipboard', Icon: ClipboardList },
+  { key: 'clipboard_check', label: 'Checklist', Icon: ClipboardCheck },
+  { key: 'book_marked', label: 'Book', Icon: BookMarked },
+  { key: 'calendar_days', label: 'Calendar', Icon: CalendarDays },
+  { key: 'camera', label: 'Camera', Icon: Camera },
+  { key: 'car_front', label: 'Car', Icon: CarFront },
+  { key: 'home', label: 'Home', Icon: Home },
+  { key: 'map_pin', label: 'Map Pin', Icon: MapPin },
+  { key: 'message_square', label: 'Message', Icon: MessageSquare },
+  { key: 'package', label: 'Package', Icon: Package },
+  { key: 'paw_print', label: 'Paw', Icon: PawPrint },
+  { key: 'star', label: 'Star', Icon: Star },
+  { key: 'globe', label: 'Globe', Icon: Globe },
+  { key: 'wrench', label: 'Wrench', Icon: Wrench },
+  { key: 'heart_handshake', label: 'Handshake', Icon: HeartHandshake },
   { key: 'heart_pulse', label: 'HeartPulse', Icon: HeartPulse },
   { key: 'leaf', label: 'Leaf', Icon: Leaf },
   { key: 'flame', label: 'Flame', Icon: Flame },
@@ -253,6 +376,57 @@ const normalizeHexColor = (value) => {
   return normalized.toLowerCase()
 }
 
+const CATEGORY_COLOR_OPTIONS = [
+  '#f59e0b',
+  '#eab308',
+  '#f97316',
+  '#ef4444',
+  '#ec4899',
+  '#8b5cf6',
+  '#6366f1',
+  '#3b82f6',
+  '#0ea5e9',
+  '#06b6d4',
+  '#14b8a6',
+  '#10b981',
+  '#22c55e',
+  '#84cc16',
+  '#a3e635',
+  '#d9f99d',
+  '#16a34a',
+  '#15803d',
+  '#0f766e',
+  '#0891b2',
+  '#0284c7',
+  '#2563eb',
+  '#1d4ed8',
+  '#4338ca',
+  '#7c3aed',
+  '#a855f7',
+  '#c026d3',
+  '#db2777',
+  '#e11d48',
+  '#be123c',
+  '#f43f5e',
+  '#fb7185',
+  '#fda4af',
+  '#fca5a5',
+  '#fdba74',
+  '#fcd34d',
+  '#fde68a',
+  '#86efac',
+  '#6ee7b7',
+  '#67e8f9',
+  '#7dd3fc',
+  '#93c5fd',
+  '#c4b5fd',
+  '#d8b4fe',
+  '#f9a8d4',
+  '#f0abfc',
+  '#f5d0fe',
+  '#ddd6fe',
+]
+
 function CategoryManagement() {
   const { user, reloadCategories } = useAuth()
   const { t } = useI18n()
@@ -276,33 +450,30 @@ function CategoryManagement() {
   )
 
   const [categoryName, setCategoryName] = useState('')
-  const [fields, setFields] = useState([{ fieldId: null, fieldName: '', fieldType: '' }])
+  const [fields, setFields] = useState([{ fieldId: null, fieldName: '', fieldType: 'number' }])
   const [editingCategory, setEditingCategory] = useState(null)
   const [originalFields, setOriginalFields] = useState([])
   const [formError, setFormError] = useState('')
   const [saveState, setSaveState] = useState('idle')
+  const [showCustomization, setShowCustomization] = useState(false)
+  const [selectedIconKey, setSelectedIconKey] = useState(resolveIconKey(guessIconKeyForCategory('')))
+  const [selectedColor, setSelectedColor] = useState(normalizeHexColor(guessColorForCategory('')) || '#facc15')
 
-  const activeColor = useMemo(() => {
-    const forced = normalizeHexColor(editingCategory?.color)
-    if (editingCategory?.id && forced) return forced
-    return normalizeHexColor(guessColorForCategory(categoryName)) || '#facc15'
-  }, [categoryName, editingCategory])
-
-  const activeIconKey = useMemo(() => {
-    const rawEditingKey = String(editingCategory?.iconKey || '').trim()
-    if (editingCategory?.id && rawEditingKey && ICON_BY_KEY[rawEditingKey]) return rawEditingKey
-    return resolveIconKey(guessIconKeyForCategory(categoryName))
-  }, [categoryName, editingCategory])
+  const activeColor = useMemo(() => normalizeHexColor(selectedColor) || '#facc15', [selectedColor])
+  const activeIconKey = useMemo(() => resolveIconKey(selectedIconKey), [selectedIconKey])
 
   const canUseSupabase = Boolean(supabase)
 
   const resetForm = () => {
     setCategoryName('')
-    setFields([{ fieldId: null, fieldName: '', fieldType: '' }])
+    setFields([{ fieldId: null, fieldName: '', fieldType: 'number' }])
     setEditingCategory(null)
     setOriginalFields([])
     setFormError('')
     setSaveState('idle')
+    setShowCustomization(false)
+    setSelectedIconKey(resolveIconKey(guessIconKeyForCategory('')))
+    setSelectedColor(normalizeHexColor(guessColorForCategory('')) || '#facc15')
   }
 
   const loadCategoryFields = async (categoryId) => {
@@ -322,25 +493,30 @@ function CategoryManagement() {
     if (!category?.id) return
     setFormError('')
     setSaveState('idle')
+    const nextIconKey = resolveIconKey(category?.icon_key || category?.iconKey)
+    const nextColor = normalizeHexColor(category?.color) || '#facc15'
     setEditingCategory({
       id: category.id,
       name: category.name,
-      iconKey: resolveIconKey(category?.icon_key || category?.iconKey),
-      color: normalizeHexColor(category?.color) || '#facc15',
+      iconKey: nextIconKey,
+      color: nextColor,
     })
     setCategoryName(titleCaseFromKey(category.name) || category.name)
+    setShowCustomization(true)
+    setSelectedIconKey(nextIconKey || resolveIconKey(guessIconKeyForCategory(category?.name)))
+    setSelectedColor(nextColor)
     try {
       const loaded = await loadCategoryFields(category.id)
       const mapped = loaded.map(row => ({
         fieldId: row.id,
         fieldName: row.field_name,
-        fieldType: row.field_type,
+        fieldType: row.field_type || 'number',
       }))
-      setFields(mapped.length ? mapped : [{ fieldId: null, fieldName: '', fieldType: '' }])
+      setFields(mapped.length ? mapped : [{ fieldId: null, fieldName: '', fieldType: 'number' }])
       setOriginalFields(mapped)
     } catch (error) {
       setFormError(error?.message ? String(error.message) : 'Unable to load category fields.')
-      setFields([{ fieldId: null, fieldName: '', fieldType: '' }])
+      setFields([{ fieldId: null, fieldName: '', fieldType: 'number' }])
       setOriginalFields([])
     }
   }
@@ -415,7 +591,7 @@ function CategoryManagement() {
   }, [activeColor, activeIconKey, categoryName, fields, isAdmin])
 
   const handleAddFieldRow = () => {
-    setFields(prev => [...(Array.isArray(prev) ? prev : []), { fieldId: null, fieldName: '', fieldType: '' }])
+    setFields(prev => [...(Array.isArray(prev) ? prev : []), { fieldId: null, fieldName: '', fieldType: 'number' }])
   }
 
   const handleRemoveFieldRow = async (index) => {
@@ -436,7 +612,7 @@ function CategoryManagement() {
     setFields(prev => {
       const next = Array.isArray(prev) ? [...prev] : []
       next.splice(index, 1)
-      return next.length ? next : [{ fieldId: null, fieldName: '', fieldType: '' }]
+      return next.length ? next : [{ fieldId: null, fieldName: '', fieldType: 'number' }]
     })
   }
 
@@ -446,6 +622,16 @@ function CategoryManagement() {
       next[index] = { ...(next[index] || {}), ...patch }
       return next
     })
+  }
+
+  const handleSelectIcon = (iconKey) => {
+    setSelectedIconKey(resolveIconKey(iconKey))
+  }
+
+  const handleSelectColor = (color) => {
+    const nextColor = normalizeHexColor(color)
+    if (!nextColor) return
+    setSelectedColor(nextColor)
   }
 
   const handleSaveCategory = async (event) => {
@@ -494,6 +680,13 @@ function CategoryManagement() {
           .eq('id', categoryId)
 
         if (metaError) throw metaError
+        setCategories(prev =>
+          (Array.isArray(prev) ? prev : []).map(category =>
+            String(category?.id || '') === categoryId
+              ? { ...category, icon_key: validatedPayload.iconKey || null, color: validatedPayload.color || null }
+              : category
+          )
+        )
         setEditingCategory(prev => (prev ? { ...prev, iconKey: validatedPayload.iconKey, color: validatedPayload.color } : prev))
 
         const nextFieldsById = new Map(
@@ -513,33 +706,68 @@ function CategoryManagement() {
           if (!nextFieldsById.has(fieldId)) removedFieldIds.push(fieldId)
         })
 
-        const ensureFieldNotUsed = async (fieldId) => {
+        const getFieldUsageCount = async (fieldId) => {
           const { count, error } = await supabase
             .from('activity_values')
             .select('id', { count: 'exact', head: true })
             .eq('field_id', fieldId)
           if (error) throw error
-          const usedCount = Number(count || 0)
-          if (usedCount > 0) throw new Error('Cannot modify or delete a field that already has saved activity values.')
+          return Number(count || 0)
         }
 
-        // Delete removed fields (only if not used).
+        const confirmFieldDataLoss = async ({ fieldName, actionLabel, usedCount }) => {
+          const safeCount = Number(usedCount || 0)
+          if (safeCount <= 0) return true
+          return confirm({
+            title: t('Confirm'),
+            description: `The field "${String(fieldName || '').trim() || 'Untitled'}" already has ${safeCount} saved value${safeCount === 1 ? '' : 's'}. ${actionLabel} will remove those saved values. Continue?`,
+            confirmText: t('Continue'),
+            cancelText: t('Cancel'),
+            danger: true,
+          })
+        }
+
+        // Delete removed fields (warn if it will delete existing values).
         for (const fieldId of removedFieldIds) {
-          await ensureFieldNotUsed(fieldId)
+          const original = originalById.get(fieldId)
+          const usedCount = await getFieldUsageCount(fieldId)
+          const ok = await confirmFieldDataLoss({
+            fieldName: original?.fieldName,
+            usedCount,
+            actionLabel: 'Deleting this field',
+          })
+          if (!ok) throw new Error('Delete canceled.')
           const { error } = await supabase.from('category_fields').delete().eq('id', fieldId)
           if (error) throw error
         }
 
-        // Update existing fields (name/type changes only if not used).
+        // Update existing fields (renames are safe; type changes clear existing values when confirmed).
         for (const entry of validatedPayload.fields.filter(item => item.fieldId)) {
           const fieldId = String(entry.fieldId)
           const original = originalById.get(fieldId)
           if (!original) continue
-          const changed =
-            normalizeFieldKey(original.fieldName) !== normalizeFieldKey(entry.fieldName) ||
-            String(original.fieldType) !== String(entry.fieldType)
-          if (!changed) continue
-          await ensureFieldNotUsed(fieldId)
+          const nameChanged = normalizeFieldKey(original.fieldName) !== normalizeFieldKey(entry.fieldName)
+          const typeChanged = String(original.fieldType) !== String(entry.fieldType)
+          if (!nameChanged && !typeChanged) continue
+
+          if (typeChanged) {
+            const usedCount = await getFieldUsageCount(fieldId)
+            const ok = await confirmFieldDataLoss({
+              fieldName: original?.fieldName,
+              usedCount,
+              actionLabel: 'Changing the field type',
+            })
+            if (!ok) throw new Error('Update canceled.')
+
+            if (usedCount > 0) {
+              const { error: deleteValuesError } = await supabase
+                .from('activity_values')
+                .delete()
+                .eq('field_id', fieldId)
+              if (deleteValuesError) throw deleteValuesError
+            }
+          }
+
           const { error } = await supabase
             .from('category_fields')
             .update({ field_name: entry.fieldName, field_type: entry.fieldType })
@@ -708,11 +936,7 @@ function CategoryManagement() {
               <h2 className="text-[20px] font-semibold text-black dark:text-zinc-100">
                 {editingCategory ? t('Edit Category') : t('New Category')}
               </h2>
-              {editingCategory && (
-                <span className="rounded-full border border-yellow-300/30 bg-yellow-400/10 px-2 py-0.5 text-[11px] font-semibold text-yellow-200">
-                  {t('Editing')}
-                </span>
-              )}
+              
             </div>
           </div>
 
@@ -737,6 +961,113 @@ function CategoryManagement() {
             />
           </div>
 
+          <div className="mt-6">
+            <button
+              type="button"
+              onClick={() => setShowCustomization(prev => !prev)}
+              className="flex w-full items-center justify-between rounded-2xl border px-4 py-3 text-left transition-colors hover:bg-slate-50"
+              style={{ backgroundColor: '#ffffff', borderColor: '#e2e8f0' }}
+            >
+              <span className="text-[15px] font-semibold text-slate-900">{t('Customized')}</span>
+              <ChevronDown
+                size={18}
+                className={`text-slate-500 transition-transform ${showCustomization ? 'rotate-180' : ''}`}
+              />
+            </button>
+
+            {showCustomization && (
+              <div className="mt-4 grid gap-4 md:grid-cols-[1fr_280px]">
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between gap-3">
+                    <h3 className="text-[16px] font-semibold text-black">{t('Choose Icon')}</h3>
+                  </div>
+                  <div className="grid grid-cols-4 gap-2 sm:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7">
+                    {ICON_OPTIONS.map(option => {
+                      const Icon = option.Icon
+                      const selected = activeIconKey === option.key
+                      return (
+                        <button
+                          key={option.key}
+                          type="button"
+                          onClick={() => handleSelectIcon(option.key)}
+                          className={`relative flex items-center justify-center rounded-2xl border p-3 transition-all ${
+                            selected
+                              ? 'border-yellow-300 bg-yellow-400/10 shadow-[0_0_0_1px_rgba(250,204,21,0.35)]'
+                              : 'border-slate-200 bg-[#ffffff] hover:border-yellow-200 hover:bg-yellow-50'
+                          }`}
+                          aria-label={option.label}
+                          title={option.label}
+                        >
+                          {selected && (
+                            <span className="absolute right-2 top-2 inline-flex h-4 w-4 items-center justify-center rounded-full bg-yellow-400 text-slate-900">
+                              <Check size={12} />
+                            </span>
+                          )}
+                          <span
+                            className="inline-flex h-10 w-10 items-center justify-center rounded-2xl border"
+                            style={{
+                              borderColor: activeColor,
+                              color: selected ? activeColor : '#334155',
+                              backgroundColor: selected ? `${activeColor}1a` : '#ffffff',
+                            }}
+                          >
+                            <Icon size={16} />
+                          </span>
+                        </button>
+                      )
+                    })}
+                  </div>
+                </div>
+
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between gap-3">
+                    <h3 className="text-[16px] font-semibold text-black">{t('Choose Color')}</h3>
+                  </div>
+                  <div className="grid grid-cols-5 gap-2 sm:grid-cols-6 md:grid-cols-4 lg:grid-cols-5">
+                    {CATEGORY_COLOR_OPTIONS.map(color => {
+                      const selected = normalizeHexColor(color) === normalizeHexColor(activeColor)
+                      return (
+                        <button
+                          key={color}
+                          type="button"
+                          onClick={() => handleSelectColor(color)}
+                          className={`relative h-11 rounded-2xl border transition-transform hover:scale-[1.03] ${
+                            selected ? 'border-slate-900 shadow-[0_0_0_2px_rgba(15,23,42,0.12)]' : 'border-white/20'
+                          }`}
+                          style={{ backgroundColor: color }}
+                          aria-label={`Select color ${color}`}
+                          title={color}
+                        >
+                          {selected && (
+                            <span className="absolute inset-0 flex items-center justify-center rounded-2xl bg-black/15 text-white">
+                              <Check size={16} />
+                            </span>
+                          )}
+                        </button>
+                      )
+                    })}
+                  </div>
+                  <div
+                    className="flex items-center gap-3 rounded-2xl border p-3"
+                    style={{ backgroundColor: '#ffffff', borderColor: '#e2e8f0' }}
+                  >
+                    <input
+                      type="color"
+                      value={activeColor}
+                      onChange={e => handleSelectColor(e.target.value)}
+                      className="h-11 w-14 cursor-pointer rounded-xl border border-slate-200 bg-transparent p-1"
+                      aria-label={t('Custom color')}
+                    />
+                    <div className="min-w-0">
+                      <p className="text-[13px] font-medium text-slate-800">{t('Custom color')}</p>
+                      <p className="text-[12px] text-slate-500">{activeColor}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+
           <div className="mt-6 flex items-center justify-between">
             <h3 className="text-[16px] font-semibold text-black dark:text-zinc-100">{t('Custom Fields')}</h3>
             <button
@@ -753,7 +1084,7 @@ function CategoryManagement() {
             {fields.map((field, index) => (
               <div
                 key={`field-${index}`}
-                className="grid gap-2 rounded-2xl border border-slate-200 bg-[#ffffff] p-3 md:grid-cols-[1fr_160px_44px]"
+                className="grid gap-2 rounded-2xl border border-slate-200 bg-[#ffffff] p-3 md:grid-cols-[1fr_44px]"
               >
                 <div className="space-y-1">
                   <label className="block text-[12px] font-medium text-slate-700">
@@ -765,31 +1096,6 @@ function CategoryManagement() {
                     placeholder={t('e.g., Seedling Count')}
                     className="w-full rounded-xl border border-neutral-300 bg-white px-3 py-2 text-[13px] text-black focus:border-yellow-300 focus:outline-none dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100"
                   />
-                </div>
-                <div className="space-y-1">
-                  <label className="block text-[12px] font-medium text-slate-700">
-                    {t('Type')}
-                  </label>
-                  <select
-                    value={field.fieldType}
-                    onChange={e => handleChangeField(index, { fieldType: e.target.value })}
-                    className="w-full rounded-xl border border-neutral-300 bg-white px-3 py-2 text-[13px] text-black focus:border-yellow-300 focus:outline-none dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100"
-                  >
-                    <option value="">{t('Select type')}</option>
-                    {field.fieldType && !FIELD_TYPES.some(type => type.value === field.fieldType) ? (
-                      <option value={field.fieldType} disabled>
-                        {(
-                          LEGACY_FIELD_TYPES.find(type => type.value === field.fieldType)?.label ||
-                          `${String(field.fieldType).toUpperCase()} (Legacy)`
-                        )}
-                      </option>
-                    ) : null}
-                    {FIELD_TYPES.map(type => (
-                      <option key={type.value} value={type.value}>
-                        {t(type.label)}
-                      </option>
-                    ))}
-                  </select>
                 </div>
                 <div className="flex items-end justify-end">
                   <button
